@@ -1,0 +1,27 @@
+.nav-link{
+    color: #919191;
+}
+
+.nav-link:hover{
+    color: #00FF00;
+    transition: color ease 0.5s;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
+.navbar-brand{
+    color: #00FF00;
+    font-family: 'Love Ya Like A Sister', cursive;
+    font-size: 1.5rem;
+    font-weight: 600;
+    opacity: 90%;
+}
+
+.navbar-brand:hover{
+
+    color: #00FF00;
+
+}
+
+nav{
+    border-bottom: 1px #212121 solid;
+}

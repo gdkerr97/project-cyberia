@@ -1,0 +1,33 @@
+body{
+    background-image: url('../../../assets/lain.jpeg');
+    background-repeat:no-repeat;
+    background-size: cover;
+    background-position:center center;
+    background-attachment: fixed;
+    height: 100vh;
+}
+
+a{
+    color: #777777;
+    font-size: 5vmin;
+    font-weight: bold;
+    opacity: 0.75;
+    text-decoration: none;
+    text-shadow: 1px 1px 5px #777777;
+    transition: ease 0.5s;
+}
+
+a:hover{
+    color: #00FF00;
+    cursor: pointer;
+}
+
+h1{
+    opacity: 0.75;
+    text-decoration: none;
+    text-shadow: 1px 1px 5px #777777;
+}
+
+#title{
+    font-family: 'Love Ya Like A Sister', cursive;
+}

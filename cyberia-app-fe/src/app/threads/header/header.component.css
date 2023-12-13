@@ -1,0 +1,27 @@
+a{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid #212121;
+    display: block;
+    height: 128px;
+    margin: 79px auto 35px auto;
+    min-height: 128px;
+    min-width: 384px;
+    text-indent: -9999px;
+    width: 384px;
+}
+
+
+h3{
+    
+    color: #00FF00;
+    font-family: 'Love Ya Like A Sister', cursive;
+    font-weight: bold;
+    opacity: 90%;
+}
+
+p{
+    color: #919191;
+    font-family: 'Love Ya Like A Sister', cursive;
+}

@@ -1,0 +1,15 @@
+
+input, textarea, .button{
+    background: #111111;
+    color: #dddddd;
+    border: 0;
+    box-shadow: 3px 3px 0px #000000;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+}
+
+textarea:focus{
+    background: #111111;
+    color: white;
+}
