@@ -1,5 +1,6 @@
 require('dotenv').config();
 var express = require('express');
+var session = require('express-session');
 const postRouter = require('./routes/post.route');
 const userRouter = require('./routes/user.route');
 const commentRouter = require('./routes/comment.route');
@@ -21,6 +22,8 @@ app.use('/api/user', userRouter);
 app.use('/api/comment', commentRouter);
 
 
-var server = app.listen(process.env.PORT || 5000, ()=> {
-    console.log(`Server start on port: ` + server.address().port);
+var server = app.listen(process.env.PORT || 5000, "127.0.0.1", ()=> {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log(`Server start on: http://%s:%s`, host, port);
 });
