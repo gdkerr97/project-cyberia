@@ -7,6 +7,12 @@ const commentRouter = require('./routes/comment.route');
 var app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, sameSite: 'lax', httpOnly: true }
+}));
 
 
 // ROUTES

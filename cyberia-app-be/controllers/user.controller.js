@@ -10,7 +10,7 @@ exports.create = (req, res) =>{
     user = new User(
         req.body.user.username,
         req.body.user.email,
-        req.body.user.session_id
+        req.session.id
     );
 
     User.create(user, (err, data) =>{
