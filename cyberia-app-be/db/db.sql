@@ -58,7 +58,7 @@ CREATE TABLE `ip_addresses` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,6 @@ CREATE TABLE `ip_addresses` (
 
 LOCK TABLES `ip_addresses` WRITE;
 /*!40000 ALTER TABLE `ip_addresses` DISABLE KEYS */;
-INSERT INTO `ip_addresses` VALUES (1,'127.0.0.1');
 /*!40000 ALTER TABLE `ip_addresses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +84,7 @@ CREATE TABLE `ip_banned` (
   `reason` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `ip_address` (`ip_address`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +93,7 @@ CREATE TABLE `ip_banned` (
 
 LOCK TABLES `ip_banned` WRITE;
 /*!40000 ALTER TABLE `ip_banned` DISABLE KEYS */;
+INSERT INTO `ip_banned` VALUES (1,'127.0.0.1','1705335228','idk');
 /*!40000 ALTER TABLE `ip_banned` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,9 +111,9 @@ CREATE TABLE `posts` (
   `created_at` varchar(45) NOT NULL,
   `ip_address` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ip_address` (`ip_address`),
-  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`ip_address`) REFERENCES `ip_addresses` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `posts_ibfk_1` (`ip_address`),
+  CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`ip_address`) REFERENCES `ip_addresses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,4 +134,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-07 22:24:11
+-- Dump completed on 2024-01-15 22:31:02

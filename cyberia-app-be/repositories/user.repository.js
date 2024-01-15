@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 User.create = function(newUser, result){
 
-    db.query('INSERT INTO users SET ?', newUser, (err, res) =>{
+    db.query('INSERT INTO ip_addresses SET ?', newUser, (err, res) =>{
 
         if(err){
             console.log(err);
@@ -21,7 +21,7 @@ User.create = function(newUser, result){
 
 User.findById = function(id, result){
 
-    db.query('SELECT * FROM users WHERE id = ?', id, (err, res) =>{
+    db.query('SELECT * FROM ip_addresses WHERE id = ?', id, (err, res) =>{
 
         if(err){
             console.log(err);
@@ -38,10 +38,27 @@ User.findById = function(id, result){
     });
 }
 
+User.findByIp = function(ip, result){
+
+    db.query('SELECT * FROM ip_addresses WHERE ip_address = ?', ip, (err, res) =>{
+
+        if(err){
+            result(err, null);
+            return;
+        }
+
+        if(!res[0]){
+            result(null, false);
+            return;
+        }
+
+        result(null, res[0]);
+    })
+}
 
 User.getAll = function(result){
 
-    db.query('SELECT * FROM users', (err, res) =>{
+    db.query('SELECT * FROM ip_addresses', (err, res) =>{
 
         if(err){
             console.log(err);
@@ -64,7 +81,7 @@ User.getAll = function(result){
 
 User.update = function(newUser, result){
 
-    db.query('UPDATE users SET ? WHERE id = ?', [newUser, newUser.id], (err, res) =>{
+    db.query('UPDATE ip_addresses SET ? WHERE id = ?', [newUser, newUser.id], (err, res) =>{
 
         if(err){
             console.log(err);
@@ -83,7 +100,7 @@ User.update = function(newUser, result){
 
 
 User.removeById = function(id, result){
-    db.query('DELETE FROM users WHERE id = ?', id, (err, res) =>{
+    db.query('DELETE FROM ip_addresses WHERE id = ?', id, (err, res) =>{
 
         if(err){
             console.log(err);
@@ -102,7 +119,7 @@ User.removeById = function(id, result){
 
 
 User.removeAll = function(result){
-    db.query('DELETE FROM users', (err, res) =>{
+    db.query('DELETE FROM ip_addresses', (err, res) =>{
         
         if(err){
             console.log(err);

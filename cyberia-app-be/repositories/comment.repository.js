@@ -26,12 +26,12 @@ Comment.findById = function(id, result){
             return;            
         }
 
-        if(res.affectedRows == 0){
-            result(null, {kind: 'No comment found!'});
+        if(res.length){
+            result(null, res[0]);
             return;
         }
 
-        result(null, res[0]);
+        result(null, {kind: 'Comment not found!'});
     });
 }
 

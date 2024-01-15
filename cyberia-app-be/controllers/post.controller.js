@@ -1,4 +1,6 @@
 const Post = require('../repositories/post.repository');
+const Banned = require('../repositories/banned.repository');
+const User = require('../repositories/user.repository');
 
 exports.create = (req, res) =>{
 
@@ -6,21 +8,74 @@ exports.create = (req, res) =>{
         res.status(400).send('Request cannot be empty!');
     }
 
-    post = new Post(
-        req.body.subject,
-        req.body.description
-    );
 
-    Post.create(post, (err, data) =>{
+    Banned.findByIp(req.ip, (err, data) =>{
 
-        if(err) res.status(500).send(err);
+        if(err){
+            return res.status(500).send(err);
+        }
+        else if(data == false){
 
-        else{
-            console.log(data);
-            res.status(201).send(data);
-        } 
+            User.findByIp(req.ip, (err, data) =>{
 
-    });
+                if(err){
+                    return res.status(500).send(err);
+                }
+
+                if(data == false){
+
+                    user = new User(
+                        req.ip
+                    );
+
+                    User.create(user, (err, data) =>{
+
+                        if(err){
+                            return res.status(500).send(err);
+                        }
+
+                        post = new Post(
+                            req.body.subject,
+                            req.body.description,
+                            data.id
+                        );
+
+                        Post.create(post, (err, data) =>{
+
+                            if(err) return res.status(500).send(err);
+                    
+                            else{
+                                console.log(data);
+                                return res.status(201).send(data);
+                            } 
+                    
+                        });
+
+                    })
+                }else{
+
+                    post = new Post(
+                        req.body.subject,
+                        req.body.description,
+                        data.id
+                    );
+
+                    Post.create(post, (err, data) =>{
+
+                        if(err) return res.status(500).send(err);
+                
+                        else{
+                            console.log(data);
+                            return res.status(201).send(data);
+                        } 
+                
+                    });
+                }
+            })
+        }else
+ 
+        return res.status(401).send('Sei stato bannato! Non puoi pubblicare');
+    })
 }
 
 
@@ -54,7 +109,6 @@ exports.findById = (req, res) =>{
         if(err) res.status(500).send(err);
 
         else{
-            console.log(data);
             res.status(200).send(data);
         }
 

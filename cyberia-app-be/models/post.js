@@ -1,10 +1,10 @@
 class Post{
 
-    constructor(subject, description, user_id){
+    constructor(subject, description, ip_address){
         this.subject = subject;
         this.description = description;
         this.created_at = Date.now();
-        this.user_id = user_id;
+        this.ip_address = ip_address;
     }
 }
 

@@ -1,5 +1,4 @@
-const User = require('../repositories/user.repository');
-const Post = require('../repositories/post.repository');
+const Banned = require('../repositories/banned.repository');
 
 exports.create = (req, res) =>{
 
@@ -7,31 +6,18 @@ exports.create = (req, res) =>{
         res.status(400).send('Request cannot be empty!');
     }
 
-    user = new User(
-        req.ip
+    banned = new Banned(
+        req.body.ip_address,
+        req.body.reason
     );
 
-    User.create(user, (err, data) =>{
+    Banned.create(banned, (err, data) =>{
 
         if(err){
             res.status(500).send(err);
         }
 
-        post = new Post(
-            req.body.post.subject,
-            req.body.post.description,
-            data.id
-        );
-
-        Post.create(post, (err, data) =>{
-
-            if(err){
-                res.status(500).send(err);
-            }
-            
-            res.status(200).send('Post and User created!');
-        })
-        
+        res.statu(201).send(data);
     });
 }
 
@@ -39,10 +25,10 @@ exports.create = (req, res) =>{
 exports.findById = (req, res) =>{
 
     if(!req){
-        res.status(400).send('Request cannot be empty!');
+        res.statu(400).send('Request cannot be empty!');
     }
 
-    User.findById(req.params.id, (err, data) =>{
+    Banned.findById(req.params.id, (err, data) =>{
 
         if(err){
             res.status(500).send(err);
@@ -59,12 +45,11 @@ exports.getAll = (req, res) =>{
         res.status(400).send('Request cannot be empty!');
     }
 
-    User.getAll((err, data) =>{
+    Banned.getAll((err, data) =>{
 
         if(err){
             res.status(500).send(err);
         }
-
 
         res.status(200).send(data);
     })
@@ -77,23 +62,21 @@ exports.update = (req, res) =>{
         res.status(400).send('Request cannot be empty!');
     }
 
-    user = new User(
+    banned = new Banned(
         req.body.id,
-        req.body.username,
-        req.body.email,
-        req.body.session_id
+        req.body.ip_address,
+        req.body.reason
     );
 
-    User.update(user, (err, data) =>{
+    Banned.update(banned, (err, data) =>{
 
         if(err){
             res.status(500).send(err);
         }
 
         res.status(200).send(data);
-    });
+    })
 }
-
 
 
 exports.removeById = (req, res) =>{
@@ -102,8 +85,7 @@ exports.removeById = (req, res) =>{
         res.status(400).send('Request cannot be empty!');
     }
 
-
-    User.removeById(req.params.id, (err, data) =>{
+    Banned.removeById(req.params.id, (err, data) =>{
 
         if(err){
             res.status(500).send(err);
@@ -114,19 +96,18 @@ exports.removeById = (req, res) =>{
 }
 
 
-exports.remove = (req, res) =>{
+exports.removeAll = (req, res) =>{
 
     if(!req){
         res.status(400).send('Request cannot be empty!');
     }
 
-
-    User.remove((err, data) =>{
+    Banned.removeAll((err, data) =>{
 
         if(err){
             res.status(500).send(err);
         }
 
         res.status(200).send(data);
-    });
+    })
 }

@@ -43,7 +43,7 @@ Post.findById = function(id, result){
             return;
         }
 
-        result({kind: 'Not found'}, null);
+        result({kind: 'Post not found'}, null);
     })
 }
 

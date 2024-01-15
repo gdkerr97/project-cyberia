@@ -4,6 +4,7 @@ var session = require('express-session');
 const postRouter = require('./routes/post.route');
 const userRouter = require('./routes/user.route');
 const commentRouter = require('./routes/comment.route');
+const bannedRouter = require('./routes/banned.route');
 
 var app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ app.use(session({
 app.use('/api/post', postRouter);
 app.use('/api/user', userRouter);
 app.use('/api/comment', commentRouter);
+app.use('/api/banned', bannedRouter);
 
 
 var server = app.listen(process.env.PORT || 5000, "127.0.0.1", ()=> {
