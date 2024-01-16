@@ -72,9 +72,10 @@ exports.create = (req, res) =>{
                     });
                 }
             })
-        }else
+        }else{
  
-        return res.status(401).send('Sei stato bannato! Non puoi pubblicare');
+        return res.status(401).send('You are banned! Cannot post');
+    }
     })
 }
 

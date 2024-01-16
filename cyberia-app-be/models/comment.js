@@ -1,9 +1,9 @@
 class Comment{
 
-    constructor(comment, user_id, post_id){
-        this.commento = comment;
+    constructor(content, ip_address, post_id){
+        this.content = content;
         this.created_at = Date.now();
-        this.user_id = user_id;
+        this.ip_address = ip_address;
         this.post_id = post_id;
     }
 }

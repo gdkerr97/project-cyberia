@@ -1,25 +1,77 @@
 const Comment = require('../repositories/comment.repository');
+const Banned  = require('../repositories/banned.repository');
+const User = require('../repositories/user.repository');
 
 exports.create = (req, res) =>{
 
     if(!req){
-        res.status(400).send('Request cannot be empty');
+        return res.status(400).send('Request cannot be empty');
     }
 
-    comment = new Comment(
-        req.body.comment,
-        req.body.user_id,
-        req.body.post_id
-    );
-
-    Comment.create(comment, (err, data) =>{
+    Banned.findByIp(req.ip, (err, data) => {
 
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }
+        else if(data == false){
 
-        res.status(201).send(data);
-    });
+            User.findByIp(req.ip, (err, data) =>{
+
+                if(err){
+                    return res.status(500).send(err);
+                }
+                else if(data == false){
+
+                    user = new User(req.ip);
+
+                    User.create(user, (err , data) =>{
+
+                        if(err){
+                            return res.status(500).send(err);
+                        }
+
+                        comment = new Comment(
+                            req.body.comment,
+                            data.id,
+                            req.body.post_id
+                        );
+
+                        Comment.create(comment, (err, data) =>{
+    
+                            if(err){
+                                return res.status(500).send(err);
+                            }
+                    
+                            return res.status(201).send(data);
+                        });
+                    });
+
+                }
+                else{
+
+                    comment = new Comment(
+                        req.body.comment,
+                        data.id,
+                        req.body.post_id
+                    );
+    
+    
+                    Comment.create(comment, (err, data) =>{
+    
+                        if(err){
+                            return res.status(500).send(err);
+                        }
+                
+                        return res.status(201).send(data);
+                    });
+                }
+            });
+
+        }else{
+
+        return res.status(401).send('You are banned! Cannot comment');
+        }
+    });    
 }
 
 
