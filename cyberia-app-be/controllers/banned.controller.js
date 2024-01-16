@@ -1,24 +1,36 @@
 const Banned = require('../repositories/banned.repository');
+const User = require('../repositories/user.repository');
 
 exports.create = (req, res) =>{
 
     if(!req){
-        res.status(400).send('Request cannot be empty!');
+        return res.status(400).send('Request cannot be empty!');
     }
 
-    banned = new Banned(
-        req.body.ip_address,
-        req.body.reason
-    );
-
-    Banned.create(banned, (err, data) =>{
-
+    User.removeByIp(req.body.ip_address, (err, data) =>{
         if(err){
-            res.status(500).send(err);
+            return res.status(500).send(err);
         }
+        else if(data.type == true){
 
-        res.statu(201).send(data);
-    });
+            banned = new Banned(
+                req.body.ip_address,
+                req.body.reason
+            );
+        
+            Banned.create(banned, (err, data) =>{
+        
+                if(err){
+                    return res.status(500).send(err);
+                }
+        
+                return res.status(201).send(data);
+            });
+        }
+        else{
+            return res.status(500).send(data);
+        }
+    })
 }
 
 

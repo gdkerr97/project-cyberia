@@ -137,4 +137,23 @@ User.removeAll = function(result){
 }
 
 
+User.removeByIp = function(ip, result){
+
+    db.query('DELETE FROM ip_addresses WHERE ip_address = ?', ip, (err, res) =>{
+
+        if(err){
+            result(err, null);
+            return;
+        }
+
+        if(res.affectedRows == 0){
+            result(null, {kind: 'No user found!', type: false});
+            return;
+        }
+
+        result(null, {message:'User removed!', type: true});
+    });
+};
+
+
 module.exports = User;
