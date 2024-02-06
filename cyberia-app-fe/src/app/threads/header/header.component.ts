@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit{
 
+  constructor(private activatedRoute: ActivatedRoute){}
+
+  id: number = this.activatedRoute.snapshot.params['id'];
   gifs: string[] = ['lain', 'lain_computer', 'lain_computer2', 'pc', 'wired'];
   file: string = '../../../assets/gif/';
 
