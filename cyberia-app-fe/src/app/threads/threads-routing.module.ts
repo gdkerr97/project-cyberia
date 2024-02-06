@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ThreadsComponent } from './threads/threads.component';
 
 const routes: Routes = [
-  {path: 'tech', component: ThreadsComponent}
+  {path: 'thread/:id', component: ThreadsComponent}
 ];
 
 @NgModule({

@@ -4,8 +4,29 @@
 
 </div>
 
-<div class="conteiner-fluid my-5 text-center">
-    <h3>/tech/ - technology</h3>
-    <p>APPLIED SCIENCE.</p>
+<div class="conteiner-fluid my-5 text-center" [ngSwitch]="id">
+    <h3 *ngSwitchCase="'all'">/{{id}}/ - recent posts</h3>
+
+    <h3 *ngSwitchCase="'tech'">/{{id}}/ - technology</h3>
+    <p *ngSwitchCase="'tech'">APPLIED SCIENCE.</p>
+
+    <h3 *ngSwitchCase="'cult'">/{{id}}/ - cyberpunk and culture</h3>
+    <p *ngSwitchCase="'cult'">ANIME. FASHION. FILM. GAMES. LIFESTYLE. LITERATURE. MUSIC.</p>
+
+    <h3 *ngSwitchCase="'art'">/{{id}}/ - art and design</h3>
+    <p *ngSwitchCase="'art'">ART. DESIGN. ORIGAMI. PHOTOGRAPHY. WRITING.</p>
+
+    <h3 *ngSwitchCase="'lambda'">/{{id}}/ - programming</h3>
+    <p *ngSwitchCase="'lambda'">STRUCTURE AND INTERPRETATION OF COMPUTER PROGRAMS.</p>
+
+    <h3 *ngSwitchCase="'delta'">/{{id}}/ - diy and projects</h3>
+    <p *ngSwitchCase="'delta'">MAKE IT. CREATE IT. DO-IT-YOURSELF. HARDWARE, SOFTWARE AND COMMUNITY PROJECTS.</p>
+
+    <h3 *ngSwitchCase="'psy'">/{{id}}/ - psychology and psychonautics</h3>
+    <p *ngSwitchCase="'psy'">DREAMS. DRGS. ALTERED STATES OF CONSCIOUSNESS.</p>
+
+    <h3 *ngSwitchCase="'r'">/{{id}}/ - miscellaneous</h3>
+    <p *ngSwitchCase="'r'">CONTENT NOT OTHERWISE SPECIFIED.</p>
+
 </div>
 
